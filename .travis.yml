@@ -4,3 +4,5 @@ android:
     - build-tools-23.0.1
     - android-23
     - sys-img-x86-android-23
+before_script:
+  - git clone https://android.googlesource.com/platform/frameworks/volley library/volley
