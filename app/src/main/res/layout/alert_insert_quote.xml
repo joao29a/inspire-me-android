@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/textQuote"
+        app:counterEnabled="true"
+        app:counterMaxLength="@integer/maxQuoteLength">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/textViewQuote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="@integer/maxQuoteLength" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/textAuthor"
+        app:counterEnabled="true"
+        app:counterMaxLength="@integer/maxAuthorLength">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/textViewAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="@integer/maxAuthorLength" />
+
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>

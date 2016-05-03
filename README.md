@@ -1,4 +1,4 @@
-# Inspire Me Android
+# Inspire Me Android - Quote!
 [![Build Status](https://travis-ci.org/joao29a/inspire-me-android.svg?branch=master)]
 (https://travis-ci.org/joao29a/inspire-me-android)
 

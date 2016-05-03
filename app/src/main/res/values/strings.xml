@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Quote!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="textQuote">Quote</string>
+    <string name="textAuthor">Author</string>
+
+    <string name="send">Send</string>
+    <string name="sending">Sending...</string>
+
+    <string name="sendQuote">Write your quote!</string>
+
+    <string name="emptyField">This field can\'t be empty</string>
+    <string name="overflowMaxLength">Can\'t overflow max length</string>
+
+    <string name="quoteSent">Quote sent!</string>
+
+    <string name="quoteNotSent">Quote not sent. Try again.</string>
+
+    <string name="errorQuoteSent">An error occurred. Try again.</string>
+</resources>
