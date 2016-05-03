@@ -149,4 +149,39 @@ public class MainActivity extends AppCompatActivity {
                     Snackbar.LENGTH_LONG).show();
         }
     }
+
+    private void checkQuote(JSONObject response) {
+        try {
+            Integer status = response.getInt(Settings.STATUS_PARAM);
+            Settings.checkStatus(status, new StatusListener() {
+                @Override
+                public void onSuccess() {
+
+                }
+
+                @Override
+                public void onFailure() {
+
+                }
+            });
+        } catch (Exception ex) {
+            Snackbar.make(findViewById(android.R.id.content), R.string.errorGetQuote,
+                    Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    private void getQuote() {
+        QuoteRequest.getRandomQuote(this, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                checkQuote(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Snackbar.make(findViewById(android.R.id.content), R.string.errorGetQuote,
+                        Snackbar.LENGTH_LONG).show();
+            }
+        });
+    }
 }

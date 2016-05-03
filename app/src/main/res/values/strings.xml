@@ -5,6 +5,8 @@
     <string name="textQuote">Quote</string>
     <string name="textAuthor">Author</string>
 
+    <string name="errorGetQuote">Error getting quote. Try again.</string>
+
     <string name="send">Send</string>
     <string name="sending">Sending...</string>
 
