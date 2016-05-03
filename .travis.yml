@@ -8,3 +8,4 @@ android:
     - sys-img-x86-android-23
 before_script:
   - git clone https://android.googlesource.com/platform/frameworks/volley library/volley
+  - mv library/volley-gradle/* library/volley/
