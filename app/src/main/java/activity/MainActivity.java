@@ -113,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
         editTextQuote  = (EditText) layout.findViewById(R.id.textViewQuote);
         editTextAuthor = (EditText) layout.findViewById(R.id.textViewAuthor);
 
+        editTextAuthor.setText(Settings.getSavedAuthor(this));
+
         builder.setView(layout);
 
         builder.setTitle(R.string.sendQuote);
@@ -166,6 +168,8 @@ public class MainActivity extends AppCompatActivity {
     private void saveQuote(Quote quote) {
         final ProgressDialog dialog = ProgressDialog.show(this, "",
                 getString(R.string.sending), true);
+
+        Settings.saveAuthor(this, quote.getAuthor());
 
         QuoteRequest.saveQuote(this, quote, new Response.Listener<JSONObject>() {
             @Override
