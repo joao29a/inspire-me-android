@@ -2,9 +2,12 @@ package activity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,13 +16,19 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.joao29a.quote.R;
 
 import org.json.JSONObject;
+
+import java.util.Random;
 
 import config.Settings;
 import listener.StatusListener;
@@ -29,8 +38,12 @@ import util.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textViewQuote;
-    private TextView textViewAuthor;
+    private EditText editTextQuote;
+    private EditText editTextAuthor;
+    private FrameLayout frameLayout;
+    private ImageView imageViewBackground;
+    private TextView textQuote;
+    private TextView authorQuote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +57,22 @@ public class MainActivity extends AppCompatActivity {
                 insertQuote();
             }
         });
+
+        frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
+
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getQuote();
+            }
+        });
+
+        imageViewBackground = (ImageView) findViewById(R.id.imageBackground);
+
+        textQuote   = (TextView) findViewById(R.id.textQuote);
+        authorQuote = (TextView) findViewById(R.id.authorQuote);
+
+        getQuote();
     }
 
     private void insertQuote() {
@@ -51,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
         View layout = getLayoutInflater().inflate(R.layout.alert_insert_quote, null);
 
-        textViewQuote  = (TextView) layout.findViewById(R.id.textViewQuote);
-        textViewAuthor = (TextView) layout.findViewById(R.id.textViewAuthor);
+        editTextQuote  = (EditText) layout.findViewById(R.id.textViewQuote);
+        editTextAuthor = (EditText) layout.findViewById(R.id.textViewAuthor);
 
         builder.setView(layout);
 
@@ -74,10 +103,10 @@ public class MainActivity extends AppCompatActivity {
                                 .getInteger(R.integer.maxQuoteLength);
                         Integer maxAuthorLength = getResources()
                                 .getInteger(R.integer.maxAuthorLength);
-                        if (isTextViewValid(textViewQuote, maxQuoteLength)
-                                && isTextViewValid(textViewAuthor, maxAuthorLength)) {
-                            Quote quote = new Quote(textViewQuote.getText().toString(),
-                                    textViewAuthor.getText().toString());
+                        if (isTextViewValid(editTextQuote, maxQuoteLength)
+                                && isTextViewValid(editTextAuthor, maxAuthorLength)) {
+                            Quote quote = new Quote(editTextQuote.getText().toString(),
+                                    editTextAuthor.getText().toString());
                             saveQuote(quote);
                             Utils.hideKeyboard(MainActivity.this);
                             dialog.dismiss();
@@ -150,24 +179,55 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void checkQuote(JSONObject response) {
+    private void checkQuote(final JSONObject response) {
         try {
             Integer status = response.getInt(Settings.STATUS_PARAM);
             Settings.checkStatus(status, new StatusListener() {
                 @Override
                 public void onSuccess() {
-
+                    try {
+                        showQuote(Quote.getQuote(response));
+                    } catch (Exception ex) {
+                        Snackbar.make(findViewById(android.R.id.content), R.string.errorGetQuote,
+                                Snackbar.LENGTH_LONG).show();
+                    }
                 }
 
                 @Override
                 public void onFailure() {
-
+                    Snackbar.make(findViewById(android.R.id.content), R.string.errorGetQuote,
+                            Snackbar.LENGTH_LONG).show();
                 }
             });
         } catch (Exception ex) {
             Snackbar.make(findViewById(android.R.id.content), R.string.errorGetQuote,
                     Snackbar.LENGTH_LONG).show();
         }
+    }
+
+    private Drawable getRandomBackground() {
+        Random random = new Random();
+        Integer val = random.nextInt(Settings.BACKGROUND_IMAGE_SIZE);
+        String file = String.format("@drawable/%s%d", Settings.BACKGROUND_IMAGE_NAME, val);
+        int imageResource = getResources().getIdentifier(file, null, getPackageName());
+        return ResourcesCompat.getDrawable(getResources(), imageResource, null);
+    }
+
+    private Typeface getRandomTypeface() {
+        Random random = new Random();
+        Integer val = random.nextInt(Settings.FONTS.length);
+        return Typeface.createFromAsset(getAssets(), String.format("fonts/%s",
+                Settings.FONTS[val]));
+    }
+
+    private void showQuote(Quote quote) {
+        imageViewBackground.setImageDrawable(getRandomBackground());
+        //Typeface tf = getRandomTypeface();
+        //textQuote.setTypeface(tf);
+        textQuote.setText(String.format("\"%s\"", quote.getText()));
+
+        //authorQuote.setTypeface(tf);
+        authorQuote.setText(quote.getAuthor());
     }
 
     private void getQuote() {

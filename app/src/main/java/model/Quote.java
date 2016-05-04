@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class Quote {
     public static String QUOTE_PARAM  = "quote";
@@ -39,5 +42,12 @@ public class Quote {
         params.put(TEXT_PARAM, this.text);
         params.put(AUTHOR_PARAM, this.author);
         return params;
+    }
+
+    public static Quote getQuote(JSONObject response) throws Exception {
+        JSONObject quote = response.getJSONObject(QUOTE_PARAM);
+        String text      = quote.getString(TEXT_PARAM);
+        String author    = quote.getString(AUTHOR_PARAM);
+        return new Quote(text, author);
     }
 }

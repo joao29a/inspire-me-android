@@ -2,4 +2,5 @@
 <resources>
     <integer name="maxQuoteLength">120</integer>
     <integer name="maxAuthorLength">30</integer>
+    <integer name="amountBackground">10</integer>
 </resources>

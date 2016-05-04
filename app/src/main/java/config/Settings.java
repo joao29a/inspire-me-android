@@ -19,4 +19,9 @@ public class Settings {
                 break;
         }
     }
+
+    public static final String BACKGROUND_IMAGE_NAME = "background_";
+    public static final Integer BACKGROUND_IMAGE_SIZE = 10;
+
+    public static final String[] FONTS = {"ChopinScript.ttf", "GreatVibes-Regular.ttf"};
 }
