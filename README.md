@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/joao29a/inspire-me-android.svg?branch=master)]
 (https://travis-ci.org/joao29a/inspire-me-android)
 
-Client side of inspirational quote from people around the galaxy.
+Client side of inspirational quote from people around the galaxy. Available on Google Play - [Quote!](https://play.google.com/store/apps/details?id=com.joao29a.quote)
 
 #License
  Copyright 2016 João Almeida de Jesus Junior
