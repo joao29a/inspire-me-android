@@ -26,6 +26,8 @@ import android.widget.TextView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.joao29a.quote.R;
 
 import org.json.JSONObject;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textQuote;
     private TextView authorQuote;
     private FloatingActionButton fab;
+    private AdView adView;
 
 
     @Override
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
                 image.setVisibility(View.GONE);
                 fab.setVisibility(View.VISIBLE);
+                showAds();
                 getQuote();
             }
 
@@ -103,6 +107,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         image.startAnimation(anim);
+    }
+
+    private void showAds() {
+        adView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
     }
 
     private void insertQuote() {

@@ -20,4 +20,6 @@
     <string name="quoteNotSent">Quote not sent. Try again.</string>
 
     <string name="errorQuoteSent">An error occurred. Try again.</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6414460943276669/1819412635</string>
 </resources>
