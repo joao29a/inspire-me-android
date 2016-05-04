@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -44,13 +46,15 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageViewBackground;
     private TextView textQuote;
     private TextView authorQuote;
+    private FloatingActionButton fab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +76,33 @@ public class MainActivity extends AppCompatActivity {
         textQuote   = (TextView) findViewById(R.id.textQuote);
         authorQuote = (TextView) findViewById(R.id.authorQuote);
 
-        getQuote();
+        logoAnimation();
+    }
+
+    private void logoAnimation() {
+        final ImageView image = (ImageView) findViewById(R.id.imageLogo);
+
+        AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(1500);
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                image.setVisibility(View.GONE);
+                fab.setVisibility(View.VISIBLE);
+                getQuote();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+        image.startAnimation(anim);
     }
 
     private void insertQuote() {
