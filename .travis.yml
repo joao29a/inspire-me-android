@@ -11,3 +11,6 @@ before_script:
   - git clone https://android.googlesource.com/platform/frameworks/volley library/volley
   - rm library/volley/src/test -r
   - mv library/volley-gradle/* library/volley/
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
