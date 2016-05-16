@@ -1,6 +1,7 @@
 # Inspire Me Android - Quote!
 [![Build Status](https://travis-ci.org/joao29a/inspire-me-android.svg?branch=master)]
 (https://travis-ci.org/joao29a/inspire-me-android)
+[![codecov](https://codecov.io/gh/joao29a/inspire-me-android/branch/master/graph/badge.svg)](https://codecov.io/gh/joao29a/inspire-me-android)
 
 Client side of inspirational quote from people around the galaxy. Available on Google Play - [Quote!](https://play.google.com/store/apps/details?id=com.joao29a.quote)
 
