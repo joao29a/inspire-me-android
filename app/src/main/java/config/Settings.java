@@ -7,7 +7,7 @@ import listener.StatusListener;
 import model.Quote;
 
 public class Settings {
-    public static final String ADDRESS = "http://54.233.77.68:5050";
+    public static final String ADDRESS = "http://52.67.31.25:5050";
 
     public static final String PREFERENCES_FILENAME = "settings";
 
